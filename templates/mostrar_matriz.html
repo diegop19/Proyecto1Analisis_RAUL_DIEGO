@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz Generada</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 100px;
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 0;
+        
+        }
+        img{
+            width: 50px; /* Ajusta el tamaño de la imagen */
+            height: 50px; /* Ajusta el tamaño de la imagen */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Matriz Generada</h1>
+        <table>
+            {% for fila in matriz %}
+                <tr>
+                    {% for elemento in fila %}
+                        <td>
+                            {% if elemento == 1 %}
+                                <img src="{{ url_for('static', filename='images/bush.png') }}" alt="arbusto">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='images/floor2.jpg') }}" alt="camino">
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        <a class="btn btn-primary" href="/">Regresar al menú</a>
+    </div>
+</body>
+</html>

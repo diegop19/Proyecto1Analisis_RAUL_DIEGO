@@ -37,12 +37,26 @@
     <div class="container text-center">
         <h1>Generar Solución</h1>
         <form action="/generar_solucion" method="POST">
+            <!-- Campo para seleccionar el punto de partida -->
             <div class="form-group">
                 <label for="start">Seleccionar punto de partida (X, Y):</label>
                 <input type="text" id="start" name="start" class="form-control" placeholder="Ejemplo: 0,0" required>
             </div>
+
+            <!-- Campo para seleccionar el tipo de algoritmo -->
+            <div class="form-group">
+                <label for="algoritmo">Seleccionar tipo de algoritmo:</label>
+                <select id="algoritmo" name="algoritmo" class="form-control" required>
+                    <option value="fuerza_bruta">Fuerza Bruta</option>
+                    <option value="optimizado">Optimizado</option>
+                </select>
+            </div>
+
+            <!-- Botón para enviar el formulario -->
             <button type="submit" class="btn btn-secondary btn-submit">Generar Solución</button>
         </form>
+
+        <!-- Botón para volver al menú principal -->
         <div class="back-button">
             <a href="/" class="btn btn-light">Volver al Menú Principal</a>
         </div>
