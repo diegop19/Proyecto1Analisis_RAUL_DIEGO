@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Solución</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Color de fondo suave */
+        }
+        .container {
+            margin-top: 100px; /* Margen superior para centrar el contenido */
+        }
+        .btn {
+            font-size: 1.25rem; /* Aumentar el tamaño de la fuente de los botones */
+            padding: 15px 30px; /* Espaciado interno de los botones */
+            width: 100%; /* Botones de ancho completo */
+            margin-bottom: 20px; /* Espacio entre los botones */
+        }
+        h1 {
+            color: #343a40; /* Color del título */
+            margin-bottom: 40px; /* Espacio debajo del título */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Espacio entre los campos del formulario */
+        }
+        .btn-submit {
+            width: auto; /* Ancho automático para el botón de envío */
+        }
+        .back-button {
+            margin-top: 20px; /* Espacio encima del botón de volver */
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1>Generar Solución</h1>
+        <form action="/generar_solucion" method="POST">
+            <div class="form-group">
+                <label for="start">Seleccionar punto de partida (X, Y):</label>
+                <input type="text" id="start" name="start" class="form-control" placeholder="Ejemplo: 0,0" required>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-submit">Generar Solución</button>
+        </form>
+        <div class="back-button">
+            <a href="/" class="btn btn-light">Volver al Menú Principal</a>
+        </div>
+    </div>
+</body>
+</html>
