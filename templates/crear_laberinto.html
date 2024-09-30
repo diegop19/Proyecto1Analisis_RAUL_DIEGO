@@ -21,14 +21,31 @@
             margin-bottom: 40px;
         }
     </style>
+    <script>
+        function validarEntrada() {
+            const input = document.getElementById('tamaño');
+            let valor = parseInt(input.value);
+
+            // Si el valor es menor que 11, ajustarlo a 11
+            if (valor < 11) {
+                input.value = 11;
+                return;
+            }
+
+            // Si el valor es par, ajustar al siguiente impar
+            if (valor % 2 === 0) {
+                input.value = valor + 1;
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container text-center">
         <h1>Especificar el tamaño del Laberinto</h1>
         <form method="POST" action="/crear_laberinto">
             <div class="form-group">
-                <label for="size">Tamaño del laberinto (n x n):</label>
-                <input type="number" class="form-control" id="fila" name="tamaño" min="5" max="100" required>
+                <label for="tamaño">Tamaño del laberinto (n x n):</label>
+                <input type="number" class="form-control" id="tamaño" name="tamaño" min="11" oninput="validarEntrada()" required>
             </div>
             <button type="submit" class="btn btn-primary">Generar Laberinto</button>
         </form>
