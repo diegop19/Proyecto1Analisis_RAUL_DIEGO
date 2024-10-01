@@ -29,11 +29,11 @@ def crear_laberinto():
         tamaño = int(request.form.get('tamaño'))
         
         # Generar la matriz
-        matriz_laberinto = generar_laberinto(tamaño)
-        
+        matriz_laberinto = generar_laberinto(tamaño)   
         laberinto = matriz_laberinto
+        print(matriz_laberinto)
         # Pasar la matriz a la plantilla para mostrarla
-        return render_template('mostrar_matriz.html', matriz=matriz_laberinto)
+        return render_template('mostrar_laberinto.html', matriz=matriz_laberinto)
     
     return render_template('crear_laberinto.html')
 

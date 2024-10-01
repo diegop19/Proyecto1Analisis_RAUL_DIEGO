@@ -19,14 +19,15 @@ def generar_laberinto(tamano):
     def crear_camino(x, y):
         laberinto[x][y] = 0  # Marcar la celda como parte del camino
 
-        # Mezclar direcciones para aleatorizar
+        # Mezclar solo direcciones horizontales y verticales
         direcciones = [(0, 1), (1, 0), (0, -1), (-1, 0)]
         random.shuffle(direcciones)
 
         for dx, dy in direcciones:
-            nx, ny = x + dx * 2, y + dy * 2  # Saltar dos celdas
+            nx, ny = x + dx * 2, y + dy * 2  # Saltar dos celdas para evitar diagonales
             if es_valido(nx, ny):
-                laberinto[x + dx][y + dy] = 0  # Crear el camino
+                # Crear el camino en una celda intermedia para evitar diagonales
+                laberinto[x + dx][y + dy] = 0  
                 crear_camino(nx, ny)  # Recursión para el siguiente paso
 
     # Comenzar desde una celda aleatoria
@@ -41,11 +42,7 @@ def generar_laberinto(tamano):
 
     # Salida
     salida_y = random.choice(range(tamano))
-    laberinto[tamano - 1][salida_y] = 0  # Salida en la parte inferior
-
-    # Asegúrate de que hay un camino de la entrada a la salida
-    laberinto[0][entrada_y] = 0  # Marcar la entrada
-    laberinto[tamano - 1][salida_y] = 0  # Marcar la salida
+    laberinto[tamano - 1][salida_y] = 2  # Salida en la parte inferior
 
     return laberinto
 
