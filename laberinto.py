@@ -1,6 +1,11 @@
 import random
+import json
+import os
+
+
 
 def generar_laberinto(tamano):
+    global laberinto
     # Inicializa la matriz del laberinto con paredes (1)
     laberinto = [[1 for _ in range(tamano)] for _ in range(tamano)]
 
@@ -40,3 +45,7 @@ def generar_laberinto(tamano):
     laberinto[tamano - 1][salida_y] = 2  # Salida en la parte inferior
 
     return laberinto
+
+
+
+
