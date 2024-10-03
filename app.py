@@ -26,7 +26,7 @@ def crear_laberinto():
         
         # Generar la matriz
         matriz_laberinto = generar_laberinto(tamaño)
-        print(matriz_laberinto)
+       
         # Pasar la matriz a la plantilla para mostrarla
         return render_template('mostrar_laberinto.html', matriz=matriz_laberinto)
     
