@@ -1,9 +1,11 @@
 "Proyecto 01 Laberinto // Curso de Análisis de Algoritmos // Diego y Raúl"
 "Página principal"
+
 import json
 import os
 from flask import Flask, render_template, request, redirect, flash , send_file
 from laberinto import generar_laberinto
+from solucion import solucion_backtracking, solucion_backtracking_optimizado
 
 app = Flask(__name__)
 app.secret_key = 'ra&diegop'
@@ -29,14 +31,8 @@ def crear_laberinto():
         tamaño = int(request.form.get('tamaño'))
         
         # Generar la matriz
-<<<<<<< HEAD
         matriz_laberinto = generar_laberinto(tamaño)
-       
-=======
-        matriz_laberinto = generar_laberinto(tamaño)   
-        laberinto = matriz_laberinto
-        print(matriz_laberinto)
->>>>>>> d418c056ca8cc034918a2e1936fe87cada84dd96
+
         # Pasar la matriz a la plantilla para mostrarla
         return render_template('mostrar_laberinto.html', matriz=matriz_laberinto)
     
@@ -89,9 +85,6 @@ def cargar_laberinto():
     else:
         flash("Por favor selecciona un archivo JSON válido.", "error")
         return redirect('/guardar_cargar')  # Redirige a la página de carga/guardar
-
-
-
 
 def cargar_laberinto_AUX(nombre_archivo):
     """
