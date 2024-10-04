@@ -16,13 +16,16 @@
         table {
             margin: 0 auto;
             border-collapse: collapse;
+            border:none;
         }
         td {
             padding: 0;
+            border:none;
         }
         img{
             width: 50px; /* Ajusta el tamaño de la imagen */
             height: 50px; /* Ajusta el tamaño de la imagen */
+            display: block;
         }
         .btn {
             font-size: 1.25rem; /* Aumentar el tamaño de la fuente de los botones */
@@ -51,6 +54,9 @@
             margin-bottom: 40px; /* Espacio debajo del título */
             font-family: 'Roboto', sans-serif;
         }
+        .btn-regresar {
+            margin-top: 40px; /* Espacio superior para separar el botón */
+        }
     </style>
 </head>
 <body>
@@ -71,7 +77,7 @@
                 </tr>
             {% endfor %}
         </table>
-        <a class="btn" href="/">Regresar al menú</a>
+        <a class="btn btn-regresar" href="/">Regresar al menú</a>
     </div>
 </body>
 </html>
