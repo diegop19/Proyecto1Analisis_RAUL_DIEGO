@@ -32,7 +32,11 @@ def crear_laberinto():
         
         # Generar la matriz
         matriz_laberinto = generar_laberinto(tamaño)
+
         laberinto = matriz_laberinto                    # Cargar laberinto a variable global
+
+        matriz_solucion = solucion_backtracking(matriz_laberinto)
+        print(matriz_solucion)
         # Pasar la matriz a la plantilla para mostrarla
         return render_template('mostrar_laberinto.html', matriz=matriz_laberinto)
     

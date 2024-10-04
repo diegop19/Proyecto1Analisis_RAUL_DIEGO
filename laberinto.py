@@ -1,6 +1,4 @@
 import random
-import json
-import os
 
 def generar_laberinto(tamano):
     global laberinto
