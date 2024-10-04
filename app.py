@@ -16,15 +16,20 @@ laberinto = None
 def index():
     return render_template('menu_inicio.html')
 
-@app.route('/generar_solucion')
+@app.route('/generar_solucion', methods=['GET', 'POST'])
 def generar_solucion():
+    global laberinto 
+    if request.method == 'POST':
+        tipo_solucion = request.form.get('algoritmo')
+        
+        if tipo_solucion == "fuerza_bruta":
+            solucion_fuerza_bruta = solucion_backtracking(laberinto)
+            
+
     return render_template('generar_solucion.html')
-
-@app.route('/crear_laberinto')
-
+    
 # Ruta para crear el laberinto
 @app.route('/crear_laberinto', methods=['GET', 'POST'])
-
 def crear_laberinto():
     global laberinto 
     if request.method == 'POST':
@@ -33,17 +38,14 @@ def crear_laberinto():
         # Generar la matriz
         matriz_laberinto = generar_laberinto(tamaño)
 
-        laberinto = matriz_laberinto                    # Cargar laberinto a variable global
-
-        matriz_solucion = solucion_backtracking(matriz_laberinto)
-        print(matriz_solucion)
+        laberinto = matriz_laberinto # Cargar laberinto a variable global
+        print(laberinto)
         # Pasar la matriz a la plantilla para mostrarla
         return render_template('mostrar_laberinto.html', matriz=matriz_laberinto)
     
     return render_template('crear_laberinto.html')
 
 @app.route('/guardar_cargar', methods=['GET', 'POST'])
-
 def guardar_cargar():
     return render_template('guardar_cargar.html')
 
