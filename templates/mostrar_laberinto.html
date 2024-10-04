@@ -15,14 +15,14 @@
         }
         table {
             margin: 0 auto;
-            border-collapse: collapse; /*ACTUALIZACION*/
-            border:none;
+            border-collapse: collapse; /* Sin bordes */
+            border: none;
         }
         td {
             padding: 0;
-            border:none;
+            border: none; /* Sin bordes en las celdas */
         }
-        img{
+        img {
             width: 50px; /* Ajusta el tamaño de la imagen */
             height: 50px; /* Ajusta el tamaño de la imagen */
             display: block;
@@ -33,24 +33,24 @@
             width: 100%; /* Botones de ancho completo */
             margin-bottom: 20px; /* Espacio entre los botones */
             color: #fefae0;
-            background:#283618;
+            background: #283618;
             border: none; /* Sin borde predeterminado */
             transition: background-color 0.7s ease; 
             font-family: 'Roboto', sans-serif;
         }
         .btn:hover {
-             background-color: #606c38; /* Color de fondo al pasar el mouse */
+            background-color: #606c38; /* Color de fondo al pasar el mouse */
         }
         .btn:active {
             background: #606c38; /* Color de fondo al ser presionado */
         }
         .btn:focus {
-             outline: none; /* Elimina el borde azul predeterminado */
+            outline: none; /* Elimina el borde azul predeterminado */
             box-shadow: none; /* Elimina el efecto de sombra */
             background-color: #606c38; /* Color de fondo al estar en foco */
         }
         h1 {
-            color: #283618 ; /* Color del título */
+            color: #283618; /* Color del título */
             margin-bottom: 40px; /* Espacio debajo del título */
             font-family: 'Roboto', sans-serif;
         }
@@ -62,7 +62,7 @@
 <body>
     <div class="container">
         <h1>Laberinto</h1>
-        <table>
+        <table id="matriz">
             {% for fila in matriz %}
                 <tr>
                     {% for elemento in fila %}
@@ -73,13 +73,59 @@
                                 <img src="{{ url_for('static', filename='images/white.png') }}" alt="camino">
                              {% elif elemento == 2 %}
                                  <img src="{{ url_for('static', filename='images/green.png') }}" alt="camino">
-                        {% endif %}
+                            {% elif elemento == 3 %}
+                                <img src="{{ url_for('static', filename='images/yelou.png') }}" alt="camino">
+                            {% endif %}
                         </td>
                     {% endfor %}
                 </tr>
             {% endfor %}
         </table>
         <a class="btn btn-regresar" href="/">Regresar al menú</a>
+        <button class="btn" onclick="resolverLaberinto()">Resolver Laberinto</button>
     </div>
+
+    <script>
+        async function resolverLaberinto() {
+            const response = await fetch('/resolver_laberinto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({'laberinto': matriz}) // Envía el laberinto si es necesario
+            });
+
+            const data = await response.json();
+            const pasos = data.pasos;
+
+            // Visualiza cada paso con un retraso
+            for (let paso of pasos) {
+                // Actualiza la matriz con el paso actual
+                actualizarMatriz(paso);
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Espera 1 segundo antes del siguiente paso
+            }
+        }
+
+        function actualizarMatriz(paso) {
+            const table = document.getElementById('matriz');
+            for (let i = 0; i < paso.length; i++) {
+                for (let j = 0; j < paso[i].length; j++) {
+                    const cell = table.rows[i].cells[j];
+                    const elemento = paso[i][j];
+
+                    // Cambia el contenido de la celda según el valor del elemento
+                    if (elemento == 1) {
+                        cell.innerHTML = '<img src="{{ url_for("static", filename="images/og.png") }}" alt="arbusto">';
+                    } else if (elemento == 0) {
+                        cell.innerHTML = '<img src="{{ url_for("static", filename="images/white.png") }}" alt="camino">';
+                    } else if (elemento == 2) {
+                        cell.innerHTML = '<img src="{{ url_for("static", filename="images/green.png") }}" alt="camino válido">';
+                    } else if (elemento == 3) {
+                        cell.innerHTML = '<img src="{{ url_for("static", filename="images/yelou.png") }}" alt="camino">';
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>

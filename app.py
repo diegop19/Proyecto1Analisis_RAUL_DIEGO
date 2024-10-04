@@ -28,10 +28,14 @@ def generar_solucion():
         if tipo_solucion == "fuerza_bruta":
             solucion_fuerza_bruta = solucion_backtracking(laberinto)
             matriz_solucion = construir_solucion(laberinto, solucion_fuerza_bruta)
+<<<<<<< HEAD
         
         if tipo_solucion == "optimizado":
             solucion_optimizado = solucion_backtracking_optimizado(laberinto)
             matriz_solucion = construir_solucion(laberinto, solucion_optimizado)
+=======
+            return render_template('mostrar_laberinto.html', matriz=matriz_solucion)
+>>>>>>> 033afe2a8cd5f567cae4794410a39c36a0304586
 
     return render_template('generar_solucion.html')
     
