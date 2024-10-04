@@ -2,14 +2,17 @@
 
 import heapq
 
-def solucion_backtracking(laberinto):
+def solucion_backtracking(laberinto, fila, columna):
     tamano = len(laberinto)
-    
+
     # Buscar la posición de la entrada (primera fila)
     for y in range(tamano):
         if laberinto[0][y] == 0:
             entrada = (0, y)
             break
+
+    if laberinto[fila][columna] == 0:
+        entrada = (fila, columna)
 
     # Buscar la posición de la salida (última fila)
     for y in range(tamano):

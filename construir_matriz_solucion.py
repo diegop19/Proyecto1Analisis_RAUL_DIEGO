@@ -4,5 +4,4 @@ def construir_solucion(matriz, coordenadas):
     for (i, j) in coordenadas:
         matriz[i][j] = 3
     
-    print("Identificar matriz solucion: ", matriz)
     return matriz

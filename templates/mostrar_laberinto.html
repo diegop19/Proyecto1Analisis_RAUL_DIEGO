@@ -87,22 +87,32 @@
 
     <script>
         async function resolverLaberinto() {
-            const response = await fetch('/resolver_laberinto', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({'laberinto': matriz}) // Envía el laberinto si es necesario
-            });
+            let continuar = true;
+            let pasoActual = 0;
 
-            const data = await response.json();
-            const pasos = data.pasos;
+            while (continuar) {
+                const response = await fetch('/resolver_laberinto', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({'laberinto': matriz}) // Envía la matriz inicial
+                });
 
-            // Visualiza cada paso con un retraso
-            for (let paso of pasos) {
-                // Actualiza la matriz con el paso actual
-                actualizarMatriz(paso);
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Espera 1 segundo antes del siguiente paso
+                const data = await response.json();
+                const pasos = data.pasos;
+
+                // Actualiza el laberinto paso por paso
+                for (let paso of pasos) {
+                    actualizarMatriz(paso);
+                    await new Promise(resolve => setTimeout(resolve, 1000));  // Espera 1 segundo entre cada paso
+                    pasoActual++;
+
+                    if (pasoActual >= pasos.length) {
+                        continuar = false;  // Termina cuando ya no hay más pasos
+                        break;
+                    }
+                }
             }
         }
 
