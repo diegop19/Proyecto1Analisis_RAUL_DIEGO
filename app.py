@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'ra&diegop'
 
 laberinto = None
+
 # Ruta para el menú principal
 @app.route('/')
 def index():
