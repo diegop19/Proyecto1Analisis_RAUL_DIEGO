@@ -79,11 +79,9 @@
             </tr>
 
             <!-- Filas del laberinto -->
-            {% set fila_index = 0 %}
             {% for fila in matriz %}
                 <tr>
-                    <td class="coordenadas">{{ fila_index }}</td> <!-- Índice de la fila en la primera columna -->
-                    {% set col_index = 0 %}
+                    <td class="coordenadas">{{ loop.index0 }}</td> <!-- Índice de la fila en la primera columna -->
                     {% for elemento in fila %}
                         <td>
                             {% if elemento == 1 %}
@@ -96,10 +94,8 @@
                                 <img src="{{ url_for('static', filename='images/yelou.png') }}" alt="camino">
                             {% endif %}
                         </td>
-                        {% set col_index = col_index + 1 %}
                     {% endfor %}
                 </tr>
-                {% set fila_index = fila_index + 1 %}
             {% endfor %}
         </table>
         <a class="btn btn-regresar" href="/">Regresar al menú</a>
