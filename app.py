@@ -28,7 +28,7 @@ def generar_solucion():
         if tipo_solucion == "fuerza_bruta":
             solucion_fuerza_bruta = solucion_backtracking(laberinto)
             matriz_solucion = construir_solucion(laberinto, solucion_fuerza_bruta)
-            
+            return render_template('mostrar_laberinto.html', matriz=matriz_solucion)
 
     return render_template('generar_solucion.html')
     
