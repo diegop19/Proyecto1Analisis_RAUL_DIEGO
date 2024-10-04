@@ -7,20 +7,37 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #fefae0;
         }
         .container {
             margin-top: 100px;
         }
-        .btn {
-            font-size: 1.25rem;
-            padding: 15px 30px;
-            width: 100%;
-            margin-bottom: 20px;
+       .btn {
+            font-size: 1.25rem; /* Aumentar el tamaño de la fuente de los botones */
+            padding: 15px 30px; /* Espaciado interno de los botones */
+            width: 100%; /* Botones de ancho completo */
+            margin-bottom: 20px; /* Espacio entre los botones */
+            color: #fefae0;
+            background:#283618;
+            border: none; /* Sin borde predeterminado */
+            transition: background-color 0.7s ease; 
+            font-family: 'Roboto', sans-serif;
+        }
+        .btn:hover {
+             background-color: #606c38; /* Color de fondo al pasar el mouse */
+        }
+        .btn:active {
+            background: #606c38; /* Color de fondo al ser presionado */
+        }
+        .btn:focus {
+             outline: none; /* Elimina el borde azul predeterminado */
+            box-shadow: none; /* Elimina el efecto de sombra */
+            background-color: #606c38; /* Color de fondo al estar en foco */
         }
         h1 {
-            color: #343a40;
-            margin-bottom: 40px;
+            color: #283618 ; /* Color del título */
+            margin-bottom: 40px; /* Espacio debajo del título */
+            font-family: 'Roboto', sans-serif;
         }
     </style>
 </head>
@@ -43,7 +60,7 @@
         <form action="/guardar_laberinto" method="POST">
             <div class="form-group">
                 <label for="nombre_archivo">Nombre del archivo para guardar:</label>
-                <input type="text" id="nombre_archivo" name="nombre_archivo" class="form-control" placeholder="Ejemplo: laberinto.json" required>
+                <input type="text" id="nombre_archivo" name="nombre_archivo" class="form-control" placeholder="Ejemplo: laberinto 1" required>
             </div>
             <button type="submit" class="btn btn-success">Guardar Laberinto</button>
         </form>
@@ -66,4 +83,3 @@
     </div>
 </body>
 </html>
-

@@ -6,8 +6,14 @@
     <title>Juego de Laberinto</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        @font-face {
+            font-family: 'JacquardaBastarda';
+            src: url('../fonts/JacquardaBastarda9-Regular.ttf') format('truetype'); /* Ajusta la ruta */
+            font-weight: normal;
+            font-style: normal;
+        }
         body {
-            background-color: #f8f9fa; /* Color de fondo suave */
+            background-color: #fefae0   ; 
         }
         .container {
             margin-top: 100px; /* Margen superior para centrar el contenido */
@@ -17,21 +23,50 @@
             padding: 15px 30px; /* Espaciado interno de los botones */
             width: 100%; /* Botones de ancho completo */
             margin-bottom: 20px; /* Espacio entre los botones */
+            color: #fefae0;
+            background:#283618;
+            border: none; /* Sin borde predeterminado */
+            transition: background-color 0.7s ease; 
+            font-family: 'Roboto', sans-serif;
+        }
+        .btn:hover {
+             background-color: #606c38; /* Color de fondo al pasar el mouse */
+        }
+        .btn:active {
+            background: #606c38; /* Color de fondo al ser presionado */
+        }
+        .btn:focus {
+             outline: none; /* Elimina el borde azul predeterminado */
+            box-shadow: none; /* Elimina el efecto de sombra */
+            background-color: #606c38; /* Color de fondo al estar en foco */
         }
         h1 {
-            color: #343a40; /* Color del título */
+            color: #283618 ; /* Color del título */
             margin-bottom: 40px; /* Espacio debajo del título */
+            font-family: 'Roboto', sans-serif;
         }
     </style>
 </head>
 <body>
     <div class="container text-center">
-        <h1>Juego de Laberinto</h1>
+        <h1>LaberintoX</h1>
+
+          <!-- Mostrar mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert-container">
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
         <div class="btn-group-vertical">
-            <a class="btn btn-primary" href="/crear_laberinto">Crear Laberinto</a>
-            <a class="btn btn-secondary" href="/generar_solucion">Generar Solución</a>
-            <a class="btn btn-success" href="/guardar_cargar">Cargar Laberintos</a>
+            <a class="btn" href="/crear_laberinto">Crear Laberinto</a>
+            <a class="btn" href="/generar_solucion">Generar Solución</a>
+            <a class="btn" href="/guardar_cargar">Cargar Laberintos</a>
+            <a class="btn" href="/mostrar_laberinto">Mostrar Laberinto</a> 
         </div>
     </div>
 </body>
-</html>

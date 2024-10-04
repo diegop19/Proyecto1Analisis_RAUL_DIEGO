@@ -7,18 +7,26 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #fefae0;
         }
         .container {
             margin-top: 100px;
         }
         .btn {
-            font-size: 1.25rem;
-            padding: 15px 30px;
+          font-size: 1.25rem; /* Aumentar el tamaño de la fuente de los botones */
+            padding: 15px 30px; /* Espaciado interno de los botones */
+            width: 100%; /* Botones de ancho completo */
+            margin-bottom: 20px; /* Espacio entre los botones */
+            color: #fefae0;
+            background:#283618;
+            border: none; /* Sin borde predeterminado */
+            transition: background-color 0.7s ease; 
+            font-family: 'Roboto', sans-serif;
         }
         h1 {
-            color: #343a40;
-            margin-bottom: 40px;
+           olor: #283618 ; /* Color del título */
+            margin-bottom: 40px; /* Espacio debajo del título */
+            font-family: 'Roboto', sans-serif;
         }
     </style>
     <script>
@@ -47,8 +55,8 @@
                 <label for="tamaño">Tamaño del laberinto (n x n):</label>
                 <input type="number" class="form-control" id="tamaño" name="tamaño" min="11" oninput="validarEntrada()" required>
             </div>
-            <button type="submit" class="btn btn-primary">Generar Laberinto</button>
-            <a class="btn btn-primary" href="/">Regresar al menú</a>
+            <button type="submit" class="btn">Generar Laberinto</button>
+            <a class="btn" href="/">Regresar al menú</a>
         </form>
     </div>
 </body>

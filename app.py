@@ -32,7 +32,7 @@ def crear_laberinto():
         
         # Generar la matriz
         matriz_laberinto = generar_laberinto(tamaño)
-
+        laberinto = matriz_laberinto
         # Pasar la matriz a la plantilla para mostrarla
         return render_template('mostrar_laberinto.html', matriz=matriz_laberinto)
     
@@ -48,12 +48,13 @@ def guardar_laberinto():
     global laberinto
     if laberinto is not None:
         nombre_archivo = request.form.get('nombre_archivo')  # Obtener el nombre del archivo desde el formulario
+        nombre_archivo += '.json'
         try:
             # Guardar el laberinto en el archivo JSON
             with open(nombre_archivo, 'w') as archivo:
                 json.dump(laberinto, archivo, indent=4)
-            print(f"Laberinto guardado exitosamente en {nombre_archivo}.")
-            flash("Laberinto guardado exitosamente.", "success")  # Mensaje de éxito
+            #int(f"Laberinto guardado exitosamente en {nombre_archivo}.")
+            #flash("Laberinto guardado exitosamente.", "success")  # Mensaje de éxito
             return send_file(nombre_archivo, as_attachment=True)  # Ofrece el archivo para descarga
         except Exception as e:
             print(f"Error al guardar el laberinto: {e}")
@@ -106,6 +107,14 @@ def cargar_laberinto_AUX(nombre_archivo):
         print(f"Error al cargar el laberinto: {e}")
         return None
     
+@app.route('/mostrar_laberinto')
+def mostrar_laberinto():
+    global laberinto
+    if laberinto is not None:
+        return render_template('mostrar_laberinto.html', matriz=laberinto)
+    else:
+        flash("No hay laberinto disponible para mostrar.", "error")
+        return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=False)

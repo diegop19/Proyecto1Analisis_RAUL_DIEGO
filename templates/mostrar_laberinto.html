@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #fefae0;
         }
         .container {
             margin-top: 100px;
@@ -19,11 +19,37 @@
         }
         td {
             padding: 0;
-        
         }
         img{
             width: 50px; /* Ajusta el tamaño de la imagen */
             height: 50px; /* Ajusta el tamaño de la imagen */
+        }
+        .btn {
+            font-size: 1.25rem; /* Aumentar el tamaño de la fuente de los botones */
+            padding: 15px 30px; /* Espaciado interno de los botones */
+            width: 100%; /* Botones de ancho completo */
+            margin-bottom: 20px; /* Espacio entre los botones */
+            color: #fefae0;
+            background:#283618;
+            border: none; /* Sin borde predeterminado */
+            transition: background-color 0.7s ease; 
+            font-family: 'Roboto', sans-serif;
+        }
+        .btn:hover {
+             background-color: #606c38; /* Color de fondo al pasar el mouse */
+        }
+        .btn:active {
+            background: #606c38; /* Color de fondo al ser presionado */
+        }
+        .btn:focus {
+             outline: none; /* Elimina el borde azul predeterminado */
+            box-shadow: none; /* Elimina el efecto de sombra */
+            background-color: #606c38; /* Color de fondo al estar en foco */
+        }
+        h1 {
+            color: #283618 ; /* Color del título */
+            margin-bottom: 40px; /* Espacio debajo del título */
+            font-family: 'Roboto', sans-serif;
         }
     </style>
 </head>
@@ -36,16 +62,16 @@
                     {% for elemento in fila %}
                         <td>
                             {% if elemento == 1 %}
-                                <img src="{{ url_for('static', filename='images/bush.png') }}" alt="arbusto">
+                                <img src="{{ url_for('static', filename='images/og.png') }}" alt="arbusto">
                             {% else %}
-                                <img src="{{ url_for('static', filename='images/floor2.jpg') }}" alt="camino">
+                                <img src="{{ url_for('static', filename='images/white.png') }}" alt="camino">
                             {% endif %}
                         </td>
                     {% endfor %}
                 </tr>
             {% endfor %}
         </table>
-        <a class="btn btn-primary" href="/">Regresar al menú</a>
+        <a class="btn" href="/">Regresar al menú</a>
     </div>
 </body>
 </html>
