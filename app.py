@@ -6,10 +6,11 @@ import os
 from flask import Flask, render_template, request, redirect, flash , send_file
 from laberinto import generar_laberinto
 from solucion import solucion_backtracking, solucion_backtracking_optimizado
+from construir_matriz_solucion import construir_solucion
 
 app = Flask(__name__)
 app.secret_key = 'ra&diegop'
-
+matriz_solucion = None
 laberinto = None
 
 # Ruta para el menú principal
@@ -20,11 +21,13 @@ def index():
 @app.route('/generar_solucion', methods=['GET', 'POST'])
 def generar_solucion():
     global laberinto 
+    global matriz_solucion
     if request.method == 'POST':
         tipo_solucion = request.form.get('algoritmo')
         
         if tipo_solucion == "fuerza_bruta":
             solucion_fuerza_bruta = solucion_backtracking(laberinto)
+            matriz_solucion = construir_solucion(laberinto, solucion_fuerza_bruta)
             
 
     return render_template('generar_solucion.html')
