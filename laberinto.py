@@ -1,3 +1,5 @@
+"Algoritmo que genera una matriz con la lógica del camino del laberinto"
+
 import random
 
 def generar_laberinto(tamano):

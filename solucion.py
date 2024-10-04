@@ -1,6 +1,7 @@
+"Solución de la ruta del laberinto por medio de backtracking y en su forma optimizada"
+
 import heapq
 
-"Solución de la ruta del laberinto por medio de backtracking"
 def solucion_backtracking(laberinto):
     tamano = len(laberinto)
     
