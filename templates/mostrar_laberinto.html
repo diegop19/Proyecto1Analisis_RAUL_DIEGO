@@ -21,11 +21,18 @@
         td {
             padding: 0;
             border: none; /* Sin bordes en las celdas */
+            text-align: center; /* Centrar el contenido en las celdas */
         }
         img {
             width: 50px; /* Ajusta el tamaño de la imagen */
             height: 50px; /* Ajusta el tamaño de la imagen */
             display: block;
+        }
+        .coordenadas {
+            color: #283618;
+            font-size: 20px; /* Tamaño de fuente para las coordenadas */
+            font-family: 'Roboto', sans-serif;
+            padding: 5px 10px;
         }
         .btn {
             font-size: 1.25rem; /* Aumentar el tamaño de la fuente de los botones */
@@ -63,79 +70,39 @@
     <div class="container">
         <h1>Laberinto</h1>
         <table id="matriz">
+            <!-- Primera fila de encabezado con coordenadas de columnas -->
+            <tr>
+                <td></td> <!-- Celda vacía en la esquina superior izquierda -->
+                {% for col_index in range(matriz[0] | length) %}
+                    <td class="coordenadas">{{ col_index }}</td> <!-- Encabezado de columnas -->
+                {% endfor %}
+            </tr>
+
+            <!-- Filas del laberinto -->
+            {% set fila_index = 0 %}
             {% for fila in matriz %}
                 <tr>
+                    <td class="coordenadas">{{ fila_index }}</td> <!-- Índice de la fila en la primera columna -->
+                    {% set col_index = 0 %}
                     {% for elemento in fila %}
                         <td>
                             {% if elemento == 1 %}
                                 <img src="{{ url_for('static', filename='images/og.png') }}" alt="arbusto">
                             {% elif elemento == 0 %}
                                 <img src="{{ url_for('static', filename='images/white.png') }}" alt="camino">
-                             {% elif elemento == 2 %}
-                                 <img src="{{ url_for('static', filename='images/green.png') }}" alt="camino">
+                            {% elif elemento == 2 %}
+                                <img src="{{ url_for('static', filename='images/green.png') }}" alt="camino">
                             {% elif elemento == 3 %}
                                 <img src="{{ url_for('static', filename='images/yelou.png') }}" alt="camino">
                             {% endif %}
                         </td>
+                        {% set col_index = col_index + 1 %}
                     {% endfor %}
                 </tr>
+                {% set fila_index = fila_index + 1 %}
             {% endfor %}
         </table>
         <a class="btn btn-regresar" href="/">Regresar al menú</a>
-        <button class="btn" onclick="resolverLaberinto()">Resolver Laberinto</button>
     </div>
-
-    <script>
-        async function resolverLaberinto() {
-            let continuar = true;
-            let pasoActual = 0;
-
-            while (continuar) {
-                const response = await fetch('/resolver_laberinto', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({'laberinto': matriz}) // Envía la matriz inicial
-                });
-
-                const data = await response.json();
-                const pasos = data.pasos;
-
-                // Actualiza el laberinto paso por paso
-                for (let paso of pasos) {
-                    actualizarMatriz(paso);
-                    await new Promise(resolve => setTimeout(resolve, 1000));  // Espera 1 segundo entre cada paso
-                    pasoActual++;
-
-                    if (pasoActual >= pasos.length) {
-                        continuar = false;  // Termina cuando ya no hay más pasos
-                        break;
-                    }
-                }
-            }
-        }
-
-        function actualizarMatriz(paso) {
-            const table = document.getElementById('matriz');
-            for (let i = 0; i < paso.length; i++) {
-                for (let j = 0; j < paso[i].length; j++) {
-                    const cell = table.rows[i].cells[j];
-                    const elemento = paso[i][j];
-
-                    // Cambia el contenido de la celda según el valor del elemento
-                    if (elemento == 1) {
-                        cell.innerHTML = '<img src="{{ url_for("static", filename="images/og.png") }}" alt="arbusto">';
-                    } else if (elemento == 0) {
-                        cell.innerHTML = '<img src="{{ url_for("static", filename="images/white.png") }}" alt="camino">';
-                    } else if (elemento == 2) {
-                        cell.innerHTML = '<img src="{{ url_for("static", filename="images/green.png") }}" alt="camino válido">';
-                    } else if (elemento == 3) {
-                        cell.innerHTML = '<img src="{{ url_for("static", filename="images/yelou.png") }}" alt="camino">';
-                    }
-                }
-            }
-        }
-    </script>
 </body>
 </html>
